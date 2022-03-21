@@ -22,7 +22,7 @@ public:
     this->size = s;
     names(s);
     
-    for(int i =0; i < names.size(); i++)
+    for(int i =0; i < size; i++)
     {
       cout<<"input name: "<<i<<": ";
       cin>>names[i];
@@ -31,8 +31,8 @@ public:
   
   void read_ages()
   {
-   cout<<"you have "<<names.size()<<" names so you will input "<<names.size()<<" ages for each one\n";
-   for(int i =0; i < names.size(); i++)
+   cout<<"you have "<<size<<" names so you will input "<<size<<" ages for each one\n";
+   for(int i =0; i < size; i++)
    {
     cout<<names[i]<<" age: ";
     cin>>ages[i];
@@ -41,7 +41,7 @@ public:
   
   void print()
   {
-   for(int i  =0; i < names.size(); i++)
+   for(int i  =0; i < size; i++)
    {
     cout<<names[i]<<" "<<ages[i]<<endl; 
    }
