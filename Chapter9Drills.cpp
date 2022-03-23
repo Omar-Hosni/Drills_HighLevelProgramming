@@ -62,7 +62,7 @@ public:
 	void pair_and_sort_and_print()
 	{
 		std::map<string, int> myMap;
-		
+
 		//assigning key-value pairs in a map
 		for (int i = 0; i < names.size(); i++)
 		{
@@ -80,12 +80,15 @@ public:
 
 		sort(v.begin(), v.end());
 
+
 		//printing values
+		cout<<"------------------------------------------"<<endl;
+		cout << "name-age pairs sorted by alphabetic order" << endl;
 		auto it = myMap.begin();
 		while (it != myMap.end())
 		{
 			cout << it->first << " " << it->second << endl;
-				it++;
+			it++;
 		}
 	}
 
@@ -100,6 +103,3 @@ int main()
 	np.pair_and_sort_and_print();
 
 }
-
-
-
