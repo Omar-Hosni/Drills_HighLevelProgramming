@@ -1,101 +1,107 @@
 #include <iostream>
-#include <array>
+#include <stdexcept>
 #include <vector>
-#include <list>
-#include <string>
 #include <algorithm>
+#include <list>
+#include <array>
+#include <string>
 
 using namespace std;
 
-
+//increase data by n of numbers, data is generic means any data type is acceptable
 template<typename T>
-void print_elements(T& t)
+void increase(T& data, int n)
 {
-	for (auto elements : t)
-		cout << elements << " ";
-	cout << endl;
-}
-
-template<typename T>
-void increase(T& t, int n)
-{
-	for (auto &element : t)
+	for (int &element : data)
 	{
 		element = element + n;
 	}
 }
 
-//array tanishq
-//array meero
-//copy tanishq's number to meero
-//copy(tanishq start, tansiq end,  meero)
-//Iterator = tansisq - range of numbers that we gonna copy
-//Iterator2 = meero - the copied numbers from tanishq
-
+//copy function to copy values from a data to another
+//Iterator from, to is an iterator that goes through range of first array and copies them into Iterator2
+//Iterator2 is the data that stores all values of Iterator1
 template<typename Iterator, typename Iterator2>
-Iterator2 copyValues(Iterator from, Iterator To, Iterator2 result)
+Iterator2 myCopy(Iterator from, Iterator to, Iterator2 result)
 {
-	if (from == To) return result;
-
-	for (Iterator it = from; it != To; ++it)
+	for (Iterator it = from; it != to; it++) //for(int i = 0; i != 10; i++)
 	{
 		*result++ = *it;
+
 	}
+
 	return result;
 }
 
-
 int main()
 {
-	
-	int tanishq[10];
-	for (int i = 0; i < 10; i++)
-	{
-		tanishq[i] = i;
-	}
-	increase(tanishq, 20);
-	print_elements(tanishq);
 
+	try {
 
-	array<int, 10> meero;
-	copyValues(tanishq, tanishq + 10, meero.begin()); //same as built in funciton
-	std::copy(tanishq, tanishq + 10, meero.begin()); //built in function
-	
-	vector<int> vec(10);
-	copyValues(tanishq, tanishq + 10, vec.begin());
-	std::copy(tanishq, tanishq + 10, vec.begin());
+		//arrays
+		int arr[10] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		increase(arr, 2);
 
-	list<int> myList(10);
-	copyValues(tanishq, tanishq + 10, myList.begin());
-	std::copy(tanishq, tanishq+10, myList.begin());
+		int arr2[10];
+		copy(arr, arr + 10, arr2);
+		myCopy(arr, arr + 10, arr2);
 
+		//vectors
+		vector<int> nums = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		increase(nums, 3);
 
-	vector<int>::iterator it = std::find(vec.begin(), vec.end(), 3);
+		vector<int> nums2(10);
+		copy(nums.begin(), nums.end(), nums2.begin()); //standard library - built-in function of copy
+		myCopy(nums.begin(), nums.end(), nums2.begin()); //my own function of copy
 
-		cout << *it << endl;
+		vector<int>::iterator it = find(nums.begin(), nums.end(), 3);
 
-		for (int i = 0; i < vec.size(); i++)
+		//searching for "it" which is an iterator that storeed the found number
+		for (int i = 0; i < 10; i++)
 		{
-			if (vec[i] == *it)
-				cout << *it << " is at index: " << i << endl;
+			if (*it == nums[i])
+				cout << *it << " is at index " << i << endl;
 		}
 
-	
-		list<int>::iterator itListFound = std::find(myList.begin(), myList.end(), 27);
-		
+
+
+
+		//lists
+		list<int> myList = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		increase(myList, 20);
+
+		list<int>myList2(10);
+		copy(myList.begin(), myList.end(), myList2.begin());
+		myCopy(myList.begin(), myList.end(), myList2.begin());
+
+		//an iterator to find the number and stores it
+		list<int>::iterator itFindNumber = find(myList.begin(), myList.end(), 27);
+
+		//another iterator to go through all elements of list
 		list<int>::iterator itList = myList.begin();
 
-
-		if (itList == itListFound)
+		//while loop that checks if found number is among the elements of list
+		while (itList != myList.end())
 		{
-			cout << *itListFound << " is found at " << std::distance(myList.begin(), itList)<<endl;
-		}
-		else
-		{
-			cout << "not found" << endl;
+			if (*itList == *itFindNumber)
+			{
+				//distance function is a built-in function, it helps calculating the distance between the beginning of list until the found number, helps find index of found number
+				cout << *itFindNumber << " is at index " << std::distance(myList.begin(), itFindNumber); 
+			}
+			//incrementing the iterator so it accesses the next element of the list
+			itList++;
 		}
 
 
+	}
+	catch (std::exception& e) {
+		std::cerr << "Exception: " << e.what() << '\n';
+		return 1;
+	}
+	catch (...) {
+		std::cerr << "Unknown exception\n";
+		return 2;
+	}
 
 
 }
