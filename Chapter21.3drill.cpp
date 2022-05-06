@@ -52,6 +52,8 @@ try {
     std::cout << "Sum of vector<double>: " << double_sum << '\n';
 
     // 6. Output the difference between the sum of vd and sum of vi
+    //vd is what stores the things we input in a  file
+    //vi is the copied from vd
     double diff_sum =
         std::inner_product(vd.begin(), vd.end(),
                 vi.begin(),
