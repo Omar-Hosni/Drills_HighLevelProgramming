@@ -5,6 +5,7 @@
 #include <list>
 #include <array>
 #include <string>
+#include <exception>
 
 using namespace std;
 
